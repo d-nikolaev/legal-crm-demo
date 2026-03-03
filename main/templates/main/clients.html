@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fa fa-users text-primary me-2"></i> Реестр клиентов</h2>
+    <button class="btn btn-primary" hx-get="{% url 'client_add' %}" hx-target="#modal-content" data-bs-toggle="modal" data-bs-target="#modal-container">
+        <i class="fa fa-plus me-1"></i> Добавить клиента
+    </button>
+</div>
+<div class="card p-0">
+    <div id="client-table-container">
+        {% include 'main/partials/client_table.html' %}
+    </div>
+</div>
+{% endblock %}

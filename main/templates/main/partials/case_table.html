@@ -1,0 +1,32 @@
+<table class="table table-hover mb-0">
+    <thead class="table-light">
+        <tr>
+            <th class="ps-4">Номер / Описание</th>
+            <th>Дата регистрации</th>
+            <th>Клиент</th>
+            <th>Ответчик</th>
+            <th>Статус</th>
+            <th class="text-end pe-4">Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for case in cases %}
+        <tr>
+            <td class="ps-4 fw-bold text-dark">{{ case.title }}</td>
+            <td>{{ case.start_date|date:"d.m.Y" }}</td>
+            <td>{{ case.client.name }}</td>
+            <td>{{ case.defendant.name }}</td>
+            <td>
+                <span class="badge {% if case.status == 'active' %}bg-info{% else %}bg-success{% endif %}">
+                    {{ case.get_status_display }}
+                </span>
+            </td>
+            <td class="text-end pe-4">
+                <button class="btn btn-sm btn-light border" hx-get="{% url 'case_full_edit' case.id %}" hx-target="#modal-content" data-bs-toggle="modal" data-bs-target="#modal-container">
+                    <i class="fa fa-edit text-primary"></i>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

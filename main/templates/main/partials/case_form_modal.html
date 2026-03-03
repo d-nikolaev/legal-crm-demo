@@ -1,0 +1,19 @@
+{% load crispy_forms_tags %}
+<div class="modal-content">
+    <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Регистрация нового дела</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <form hx-post="{% url 'add_case' %}" hx-target="#event-grid">
+        <div class="modal-body">
+            {% crispy form %}
+            <div class="alert alert-warning mt-3 small">
+                <i class="fa fa-info-circle"></i> После создания дела, система автоматически рассчитает сроки обжалования, если вы добавите решение суда.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            <button type="submit" class="btn btn-primary">Создать дело</button>
+        </div>
+    </form>
+</div>

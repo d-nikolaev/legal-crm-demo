@@ -1,0 +1,30 @@
+<div class="card h-100 {% if event.date_planned < today and not event.is_completed %}border-danger{% endif %}" id="event-{{ event.id }}">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <h6 class="text-muted small">{{ event.get_event_type_display }}</h6>
+            <i class="fa fa-circle {% if event.is_completed %}text-success{% elif event.date_planned < today %}text-danger{% else %}text-warning{% endif %}"></i>
+        </div>
+        <h5 class="card-title">{{ event.case.title }}</h5>
+        <div class="small">
+            <strong>Кл:</strong> {{ event.case.client.name }}<br>
+            <strong>Отв:</strong> {{ event.case.defendant.name }}<br>
+            <strong>Срок:</strong> <span class="{% if event.date_planned < today and not event.is_completed %}text-danger fw-bold{% endif %}">{{ event.date_planned|date:"d.m.Y" }}</span>
+        </div>
+        {% if event.comment %}
+        <div class="alert alert-light border py-1 mt-2 small mb-0">{{ event.comment }}</div>
+        {% endif %}
+    </div>
+    <div class="card-footer bg-white border-0 pb-3">
+        <button 
+            hx-post="{% url 'toggle_event' event.id %}" 
+            hx-target="#event-{{ event.id }}" 
+            hx-swap="outerHTML"
+            class="btn btn-sm {% if event.is_completed %}btn-success{% else %}btn-outline-primary{% endif %} w-100">
+            {% if event.is_completed %}
+                <i class="fa fa-check me-1"></i> Выполнено
+            {% else %}
+                Отметить выполнение
+            {% endif %}
+        </button>
+    </div>
+</div>

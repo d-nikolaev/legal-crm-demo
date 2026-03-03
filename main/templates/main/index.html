@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-4">
+        <h2 class="fw-bold"><i class="fa fa-calendar-check text-primary me-2"></i> Дневник</h2>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-text bg-white border-end-0"><i class="fa fa-search text-muted"></i></span>
+            <input type="text" name="q" class="form-control border-start-0 ps-0" 
+                   placeholder="Поиск..." hx-get="{% url 'index' %}" hx-target="#event-grid" hx-trigger="keyup changed delay:500ms">
+        </div>
+    </div>
+    <div class="col-md-4 text-end">
+        <button class="btn btn-primary shadow-sm" 
+                hx-get="{% url 'add_case' %}" 
+                hx-target="#modal-content" 
+                data-bs-toggle="modal" 
+                data-bs-target="#modal-container">
+            <i class="fa fa-plus-circle me-1"></i> Регистрация дела
+        </button>
+    </div>
+</div>
+
+<div class="row" id="event-grid">
+    {% include 'main/partials/event_list.html' %}
+</div>
+{% endblock %}

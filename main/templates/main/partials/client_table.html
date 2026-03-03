@@ -1,0 +1,28 @@
+<table class="table table-hover mb-0">
+    <thead class="table-light">
+        <tr>
+            <th class="ps-4">Наименование / ФИО</th>
+            <th>Роль</th>
+            <th>Телефон</th>
+            <th class="text-end pe-4">Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td class="ps-4 fw-bold text-dark">{{ client.name }}</td>
+            <td>
+                <span class="badge {% if client.role == 'plaintiff' %}bg-primary{% elif client.role == 'defendant' %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                    {{ client.get_role_display }}
+                </span>
+            </td>
+            <td>{{ client.phone|default:"—" }}</td>
+            <td class="text-end pe-4">
+                <button class="btn btn-sm btn-light border" hx-get="{% url 'client_edit' client.id %}" hx-target="#modal-content" data-bs-toggle="modal" data-bs-target="#modal-container">
+                    <i class="fa fa-edit"></i>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,15 @@
+{% load crispy_forms_tags %}
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Карточка дела</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+    <form hx-post="{% if instance %}{% url 'case_full_edit' instance.id %}{% else %}{% url 'case_full_add' %}{% endif %}" hx-target="#case-table-container">
+        <div class="modal-body">
+            {% crispy form %}
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+    </form>
+</div>

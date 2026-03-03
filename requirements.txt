@@ -1,0 +1,8 @@
+Django==5.0.2
+psycopg2-binary==2.9.9
+django-crispy-forms==2.1
+crispy-bootstrap5==2024.2
+django-htmx==1.17.2
+docxtpl==0.17.0
+openpyxl==3.1.2
+python-dotenv==1.0.1
